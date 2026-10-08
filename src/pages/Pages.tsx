@@ -24,11 +24,23 @@ import {
   Users,
   Wrench,
 } from 'lucide-react'
+import { useEffect } from 'react'
 import type { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import chalmersLogo from '../assets/chalmers-logo.png'
-import { sources, teamMembers } from '../data/siteContent'
+import { ikeaSources, sources, teamMembers } from '../data/siteContent'
 import { Eyebrow, FlowList, InfoCard, Notice, PageIntro, SectionHeading } from '../components/common/Content'
+
+function Cite({ n }: { n: number }) {
+  const source = ikeaSources.find((item) => item.number === n)
+  return <sup className="cite"><Link to={`/references#ref-${n}`} aria-label={`Reference ${n}: ${source?.title ?? ''}`}>[{n}]</Link></sup>
+}
+
+function SourceLink({ n, children }: { n: number; children: ReactNode }) {
+  const source = ikeaSources.find((item) => item.number === n)
+  if (!source) return null
+  return <a className="source-link" href={source.url} target="_blank" rel="noopener noreferrer">{children} <ArrowUpRight aria-hidden="true" /></a>
+}
 
 const steps = [
   { title: 'Identify', text: 'Find or scan an IKEA product.', icon: ScanLine },
@@ -216,32 +228,32 @@ export function Demo() {
 export function Customers() {
   return (
     <>
-      <PageIntro eyebrow="04 · Customer value" title="Meet Emma." description="A fictional persona helps us explore how recycling an end-of-life item could fit into an ordinary customer journey." />
+      <PageIntro eyebrow="04 · Customer value" title="Meet Emma." description="How could Return & Earn make replacing old furniture easier and more rewarding?" />
       <section className="section section-tight">
         <div className="container">
           <div className="persona-banner">
             <div className="persona-avatar">E<span>✳</span></div>
-            <div><Eyebrow>Illustrative persona</Eyebrow><h2>Emma, 22 <span>· University student</span></h2><p>Lives in an apartment, has a limited budget and owns an old IKEA BILLY bookcase that is no longer worth repairing or reselling. She wants a new bookcase.</p></div>
+            <div><Eyebrow>ILLUSTRATIVE PERSONA</Eyebrow><h2>Emma, 22 <span>· University student</span></h2><p>Emma is a 22-year-old university student with a limited budget. Her old BILLY bookcase is broken beyond reasonable repair, and she's planning to visit IKEA to buy a replacement. She can bring the old bookcase along, but wants the trip to be worthwhile.</p></div>
             <div className="persona-item"><div className="mini-bookcase"><i /><i /><i /></div><span>Her old BILLY</span></div>
           </div>
           <div className="before-after">
             <article className="journey-card journey-before">
-              <span className="journey-label">WITHOUT RETURN &amp; EARN</span><h3>Disposal is another errand.</h3>
-              <ul><li>Figure out where the old bookcase can go</li><li>Arrange a separate trip to a recycling centre</li><li>Spend time—and possibly money—disposing of it</li><li>Receive nothing for material recycling</li></ul>
+              <span className="journey-label">WITHOUT RETURN &amp; EARN</span><h3>Two separate errands.</h3>
+              <ul><li>Find out where to recycle the broken bookcase</li><li>Arrange a separate trip to the recycling centre, potentially involving transport costs.</li><li>Visit IKEA to buy a replacement bookcase</li><li>Receive no incentive for returning the old furniture</li></ul>
             </article>
             <div className="journey-arrow"><ArrowRight /></div>
             <article className="journey-card journey-after">
-              <span className="journey-label">WITH THE CONCEPT</span><h3>Recycling fits into her IKEA visit.</h3>
-              <ul><li>Identify her bookcase through the app</li><li>See an estimated value and return guidance</li><li>Bring the old item to IKEA for verification</li><li>Receive a proposed voucher after acceptance</li></ul>
+              <span className="journey-label">WITH THE CONCEPT</span><h3>One IKEA visit. Two things taken care of.</h3>
+              <ul><li>Identify the old BILLY through the app</li><li>See the estimated material value and return instructions</li><li>Bring the old bookcase when visiting IKEA for its replacement</li><li>Return the bookcase and receive a small voucher if IKEA accepts it.</li></ul>
             </article>
           </div>
           <div className="card-grid card-grid-four">
-            <InfoCard icon={HeartHandshake} title="Convenience">Recycling becomes part of an ordinary IKEA visit.</InfoCard>
-            <InfoCard icon={CircleDollarSign} title="An incentive">Emma receives something in return for old furniture.</InfoCard>
-            <InfoCard icon={Smartphone} title="Simplicity">A digital flow could guide her through the process.</InfoCard>
-            <InfoCard icon={Box} title="Transparency">An estimate explains the possible material value.</InfoCard>
+            <InfoCard icon={HeartHandshake} title="Convenience">Emma combines furniture recycling with a planned IKEA shopping trip.</InfoCard>
+            <InfoCard icon={CircleDollarSign} title="An Incentive">A small proposed voucher makes returning her old furniture more rewarding.</InfoCard>
+            <InfoCard icon={Smartphone} title="Simplicity">The app guides Emma through identifying and returning her bookcase.</InfoCard>
+            <InfoCard icon={Box} title="Transparency">An estimate shows the potential material value before she returns it.</InfoCard>
           </div>
-          <Notice>Emma is a fictional persona, not a participant in user research. The concept should not encourage recycling furniture that can still be repaired, reused or resold.</Notice>
+          <Notice>Return &amp; Earn is intended for furniture that can no longer reasonably be repaired, reused or resold.</Notice>
         </div>
       </section>
     </>
@@ -309,13 +321,31 @@ export function Ikea() {
             </div>
           </section>
 
-          <section className="ikea-economic">
-            <div>
-              <Eyebrow>One question to evaluate</Eyebrow>
-              <h2>Making the model viable</h2>
-              <p>For Return &amp; Earn to work at scale, the value of recovered materials and the broader benefits of circularity must be considered alongside incentives, collection, and processing costs.</p>
-              <p>The service may offer value beyond direct financial profit, but its economic feasibility would need to be evaluated.</p>
+          <section className="ikea-needs">
+            <SectionHeading eyebrow="IKEA's published priorities" title="What IKEA says it needs" />
+            <p className="ikea-needs-message">IKEA wants access to suitable secondary raw materials.<Cite n={1} /> Return &amp; Earn explores whether incentivized furniture returns can help create an additional source.</p>
+            <div className="ikea-needs-grid">
+              <article className="ikea-need-card ikea-need-primary">
+                <span className="ikea-need-icon"><Layers aria-hidden="true" /></span>
+                <span className="ikea-need-focus">Return &amp; Earn's primary opportunity</span>
+                <h3>Availability</h3>
+                <p>IKEA needs access to suitable secondary raw materials<Cite n={1} />, and notes that recycled feedstock availability is currently insufficient.<Cite n={4} /></p>
+                <div className="ikea-need-contribution"><b>Potential contribution</b><span>More returned end-of-life furniture could create an additional possible material stream.</span></div>
+              </article>
+              <article className="ikea-need-card">
+                <span className="ikea-need-icon"><ScanLine aria-hidden="true" /></span>
+                <h3>Traceability</h3>
+                <p>Recovered materials need information about their origin and composition.<Cite n={1} /></p>
+                <div className="ikea-need-contribution"><b>Potential contribution</b><span>Scanning, search or purchase history could help document what is returned, though not provide complete traceability by itself.</span></div>
+              </article>
+              <article className="ikea-need-card">
+                <span className="ikea-need-icon"><CircleDollarSign aria-hidden="true" /></span>
+                <h3>Affordability</h3>
+                <p>Secondary material sourcing needs to be economically viable.<Cite n={1} /></p>
+                <div className="ikea-need-contribution"><b>Potential contribution</b><span>Explore whether recovered material value and circularity benefits can justify incentive, collection and processing costs.</span></div>
+              </article>
             </div>
+            <p className="source-line">Source: <SourceLink n={1}>IKEA Sustainability Strategy 2025–2030</SourceLink></p>
           </section>
 
           <section className="ikea-goals-transition">
@@ -347,7 +377,48 @@ export function SustainabilityGoals() {
           <div className="targets-grid">
             {targets.map((target) => <article className="target-card" key={target.label}><strong>{target.value}</strong><p>{target.label}</p><span>{target.by} ambition</span></article>)}
           </div>
-          <div className="wood-focus"><span className="wood-icon"><span /><span /><span /></span><div><Eyebrow>Materials in focus</Eyebrow><h3>Recycled wood and particleboard</h3><p>Wood-based materials are an important area of IKEA's recycled-material work. Return &amp; Earn could explore whether customer returns provide suitable, traceable material streams for recovery. Specific recycled-wood ambitions and definitions should be verified against the latest IKEA reporting before publication.</p></div><a href="https://www.ikea.com/global/en/our-business/sustainability/recycled-materials/" target="_blank" rel="noreferrer">IKEA materials information <ArrowUpRight /></a></div>
+          <p className="source-line source-line-left">Source: <SourceLink n={1}>IKEA Sustainability Strategy 2025–2030</SourceLink> <Cite n={1} /></p>
+          <section className="wood-detail">
+            <SectionHeading
+              eyebrow="Materials in focus"
+              title="A closer look: recycled wood and particleboard"
+              description="IKEA has also set specific recycled-wood ambitions. These are separate from the broader 90% target, which covers recycled or renewable content."
+            />
+            <div className="wood-ambitions">
+              <article className="target-card">
+                <strong>80%</strong>
+                <p>Recycled wood content in particleboard</p>
+                <span>2030 ambition</span>
+              </article>
+              <article className="target-card">
+                <strong>≥ ⅓</strong>
+                <p>At least one-third of IKEA's wood-based range made from recycled wood by 2030.</p>
+                <span>Separate range-level ambition</span>
+              </article>
+            </div>
+            <div className="wood-progress" role="group" aria-label="Recycled wood content in particleboard: FY24 reported compared with the 2030 ambition">
+              <h3 className="wood-progress-heading">The particleboard ambition</h3>
+              <div className="wood-progress-row">
+                <div className="wood-progress-label"><b>FY24 reported</b><span>Recycled wood content in particleboard</span></div>
+                <div className="wood-progress-track"><i className="wood-progress-fill wood-progress-actual" style={{ width: '30.3%' }} /></div>
+                <strong>30.3%</strong>
+              </div>
+              <div className="wood-progress-row">
+                <div className="wood-progress-label"><b>FY30 ambition</b><span>Recycled wood content in particleboard</span></div>
+                <div className="wood-progress-track"><i className="wood-progress-fill wood-progress-target" style={{ width: '80%' }} /></div>
+                <strong>80%</strong>
+              </div>
+              <p className="wood-progress-note">In FY24, IKEA reported 30.3% recycled wood content in particleboard<Cite n={2} />, compared with its 80% ambition for 2030<Cite n={1} />. Return &amp; Earn explores whether end-of-life furniture could provide an additional source of suitable recycled wood.</p>
+              <p className="wood-progress-caveat">IKEA's recycled wood can include pre- and post-consumer sources<Cite n={3} />; recovered materials must meet quality and processing requirements. Return &amp; Earn is a proposal, not an IKEA service.</p>
+            </div>
+            <p className="source-line source-line-left">Sources: <SourceLink n={2}>IKEA Sustainability Report FY24</SourceLink> <Cite n={2} /> · <SourceLink n={3}>IKEA Wood and Forestry</SourceLink> <Cite n={3} /></p>
+          </section>
+          <div className="wood-focus"><span className="wood-icon"><span /><span /><span /></span><div><Eyebrow>Why BILLY?</Eyebrow><h3>Particleboard is widely used in IKEA furniture</h3><p>Particleboard is widely used in IKEA furniture, including products such as BILLY.<Cite n={5} /> Recovering suitable wood-based material from end-of-life furniture could potentially contribute to the supply of recycled material used in future particleboard production. This is a possibility to investigate: not every bookcase can be recycled into new particleboard, and Return &amp; Earn is not an existing IKEA service.</p></div><SourceLink n={5}>IKEA wood design and innovation</SourceLink></div>
+          <div className="wood-challenge">
+            <h3>The challenge is not only recycling — it is securing suitable materials.</h3>
+            <p>IKEA has identified that current availability of recycled feedstock is insufficient.<Cite n={4} /> By encouraging customers to return furniture that has reached the end of its usable life, Return &amp; Earn explores whether more suitable post-consumer material could become available for recovery. The service is intended for furniture that can no longer reasonably be repaired, reused or resold.</p>
+            <p className="source-line source-line-left">Source: <SourceLink n={4}>IKEA Recycled Materials</SourceLink> <Cite n={4} /></p>
+          </div>
           <SectionHeading
             eyebrow="A proposed material journey"
             title="From old furniture to potential new resources"
@@ -420,7 +491,7 @@ export function SustainabilityGoals() {
               <InfoCard icon={Factory} title="Actual Circular Impact">How much recovered material would genuinely replace virgin inputs rather than simply being collected?</InfoCard>
             </div>
           </section>
-          <Notice>Targets shown are ambitions provided in the project brief and must be checked against current official IKEA reporting before external publication. Impact measures are proposed future measurements—not actual project results.</Notice>
+          <Notice>Targets shown are IKEA's published ambitions, and reported figures come from the sources cited above; check IKEA's latest reporting before external publication. Impact measures are proposed future measurements—not actual project results.</Notice>
         </div>
       </section>
     </>
@@ -532,14 +603,37 @@ export function Team() {
 }
 
 export function References() {
+  const { hash } = useLocation()
+  useEffect(() => {
+    if (!hash) return
+    const timer = window.setTimeout(() => document.getElementById(hash.slice(1))?.scrollIntoView({ block: 'center', behavior: 'instant' }), 0)
+    return () => window.clearTimeout(timer)
+  }, [hash])
   return (
     <>
       <PageIntro eyebrow="10 · Sources & transparency" title="Evidence matters." description="This page separates verified public sources from research references still to be added. Verify every claim against its source before publication." />
       <section className="section section-tight">
         <div className="container">
-          <Notice>Accessed 8 October 2026 where a source URL is provided. IKEA targets shown elsewhere on this site follow the project brief and should be rechecked against the latest official reporting.</Notice>
+          <Notice>Accessed 8 October 2026 where a source URL is provided. IKEA targets and figures on the Why IKEA? and 2030 Goals pages are numbered and link to the entries below; recheck them against the latest official IKEA reporting before publication.</Notice>
           <div className="references-list">
-            {sources.map((group) => <section className="reference-group" key={group.group}><div className="reference-group-title"><span className="reference-dot" /><h2>{group.group}</h2></div><div className="reference-entries">{group.entries.map((source) => <article className="reference-entry" key={source.title}><div><h3>{source.title}</h3><p>{source.publisher} · {source.year}</p></div>{source.url ? <a href={source.url} target="_blank" rel="noreferrer" aria-label={`Open ${source.title} in a new tab`}>Open source <ArrowUpRight /></a> : <span className="tag tag-outline">TO BE VERIFIED</span>}</article>)}</div></section>)}
+            <section className="reference-group">
+              <div className="reference-group-title"><span className="reference-dot" /><h2>IKEA Official Publications</h2></div>
+              <div className="reference-entries">
+                {ikeaSources.map((source) => (
+                  <article className="reference-entry reference-entry-numbered" id={source.id} key={source.id}>
+                    <span className="reference-number">[{source.number}]</span>
+                    <div>
+                      <h3>{source.title}</h3>
+                      <p>{source.publisher} · {source.year}</p>
+                      <p className="reference-used"><b>Used for:</b> {source.used}</p>
+                      {source.location && <p className="reference-used"><b>Where:</b> {source.location}</p>}
+                    </div>
+                    <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${source.title} in a new tab`}>Open source <ArrowUpRight /></a>
+                  </article>
+                ))}
+              </div>
+            </section>
+            {sources.map((group) => <section className="reference-group" key={group.group}><div className="reference-group-title"><span className="reference-dot" /><h2>{group.group}</h2></div><div className="reference-entries">{group.entries.map((source) => <article className="reference-entry" key={source.title}><div><h3>{source.title}</h3><p>{source.publisher} · {source.year}</p></div>{source.url ? <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${source.title} in a new tab`}>Open source <ArrowUpRight /></a> : <span className="tag tag-outline">TO BE VERIFIED</span>}</article>)}</div></section>)}
           </div>
           <div className="reference-note"><LockKeyhole /><p>We have not invented furniture waste statistics, user research results, business viability findings or completed prototypes. Placeholders indicate where supporting evidence is still needed.</p></div>
         </div>
