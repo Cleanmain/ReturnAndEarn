@@ -44,24 +44,46 @@ function SourceLink({ n, children }: { n: number; children: ReactNode }) {
 
 const steps = [
   { title: 'Identify', text: 'Find or scan an IKEA product.', icon: ScanLine },
-  { title: 'Estimate', text: 'See an indicative material recovery value.', icon: ClipboardList },
-  { title: 'Incentivize', text: 'Review a proposed voucher amount.', icon: HandCoins },
-  { title: 'Return', text: 'Bring end-of-life furniture to IKEA.', icon: Truck },
-  { title: 'Verify', text: 'IKEA confirms the product and its condition.', icon: ShieldCheck },
-  { title: 'Recover', text: 'Suitable materials are sorted for recycling.', icon: Recycle },
+  { title: 'Estimate', text: 'Estimate net material value from material types, quantities and recovery costs.', icon: ClipboardList },
+  { title: 'Review Offer', text: 'See the estimated voucher, including a proposed return bonus.', icon: HandCoins },
+  { title: 'Return', text: 'Bring eligible end-of-life furniture to IKEA.', icon: Truck },
+  { title: 'Verify & Reward', text: 'IKEA verifies the return and issues the voucher if accepted.', icon: ShieldCheck },
+  { title: 'Recover', text: 'Suitable materials are sorted and processed into potential secondary raw materials.', icon: Recycle },
 ]
 
 function StepCards() {
+  const renderStep = (step: (typeof steps)[number], index: number) => {
+    const Icon = step.icon
+    return (
+      <article className={`step-card solution-step-card solution-step-card-${index + 1}`} role="listitem" key={step.title}>
+        <span className="step-number">0{index + 1}</span>
+        <span className="card-icon"><Icon size={21} aria-hidden="true" /></span>
+        <h3>{step.title}</h3>
+        <p>{step.text}</p>
+      </article>
+    )
+  }
+
   return (
-    <div className="step-grid">
-      {steps.map(({ title, text, icon: Icon }, index) => (
-        <article className="step-card" key={title}>
-          <span className="step-number">0{index + 1}</span>
-          <span className="card-icon"><Icon size={21} aria-hidden="true" /></span>
-          <h3>{title}</h3>
-          <p>{text}</p>
-        </article>
-      ))}
+    <div className="solution-journey" role="group" aria-label="Six-step Return and Earn journey">
+      <div className="solution-journey-row" role="list" aria-label="Steps 1 to 3">
+        {renderStep(steps[0], 0)}
+        <svg className="solution-journey-link" viewBox="0 0 36 24" role="presentation" aria-hidden="true"><path d="M0 12h29m-7-7 7 7-7 7" /></svg>
+        {renderStep(steps[1], 1)}
+        <svg className="solution-journey-link" viewBox="0 0 36 24" role="presentation" aria-hidden="true"><path d="M0 12h29m-7-7 7 7-7 7" /></svg>
+        {renderStep(steps[2], 2)}
+      </div>
+      <svg className="solution-journey-turn" viewBox="0 0 1000 52" preserveAspectRatio="none" role="presentation" aria-hidden="true">
+        <path className="solution-journey-turn-desktop" d="M843 0v26H156v26m-7-7 7 7 7-7" />
+        <path className="solution-journey-turn-mobile" d="M500 0v45m-7-7 7 7 7-7" />
+      </svg>
+      <div className="solution-journey-row" role="list" aria-label="Steps 4 to 6">
+        {renderStep(steps[3], 3)}
+        <svg className="solution-journey-link" viewBox="0 0 36 24" role="presentation" aria-hidden="true"><path d="M0 12h29m-7-7 7 7-7 7" /></svg>
+        {renderStep(steps[4], 4)}
+        <svg className="solution-journey-link" viewBox="0 0 36 24" role="presentation" aria-hidden="true"><path d="M0 12h29m-7-7 7 7-7 7" /></svg>
+        {renderStep(steps[5], 5)}
+      </div>
     </div>
   )
 }
@@ -129,8 +151,11 @@ export function Problem() {
               <div className="perspective-top"><span className="card-icon"><Leaf /></span><span className="perspective-number">01 / PLANET</span></div>
               <h2>Materials are lost from useful cycles.</h2>
               <p>End-of-life furniture can contain wood, metals, plastics and textiles. When these materials are not recovered, potential secondary resources are lost and demand for virgin materials may remain higher.</p>
-              <div className="stat-placeholder"><strong>—</strong><span>European furniture waste each year<br /><b>[Verified statistic coming soon]</b></span></div>
-              <div className="material-chips"><span>WOOD</span><span>METAL</span><span>PLASTICS</span><span>TEXTILES</span></div>
+              <div className="furniture-stat">
+                <div className="furniture-stat-main"><strong>~10 million tonnes</strong><span>of furniture waste generated in the EU each year</span></div>
+                <div className="furniture-stat-context"><strong>80–90%</strong><p>Historically estimated to be incinerated or landfilled within the EU municipal furniture-waste stream.</p></div>
+                <p className="furniture-stat-sources">Sources: <a href="https://circulareconomy.europa.eu/platform/sites/default/files/2024-12/JRC138903_01.pdf" target="_blank" rel="noopener noreferrer">European Commission JRC (2024)</a>; <a href="https://eeb.org/en/library/circular-economy-opportunities-in-the-furniture-sector/" target="_blank" rel="noopener noreferrer">EEB/Eunomia (2017)</a>.</p>
+              </div>
             </article>
             <article className="perspective-card perspective-individual">
               <div className="perspective-top"><span className="card-icon"><Users /></span><span className="perspective-number">02 / PEOPLE</span></div>
@@ -146,7 +171,6 @@ export function Problem() {
             </article>
           </div>
           <div className="question-banner"><Sparkles /><p>What if end-of-life furniture could become a valuable resource instead of a disposal problem?</p></div>
-          <p className="source-note">Furniture waste and recovery figures are intentionally left as placeholders until the project team verifies a reliable source.</p>
         </div>
       </section>
     </>
@@ -156,17 +180,33 @@ export function Problem() {
 export function Solution() {
   return (
     <>
-      <PageIntro eyebrow="02 · Our solution" title="A take-back system designed around material recovery." description="Return & Earn is a proposed digital service for IKEA furniture that can no longer reasonably be repaired, reused or resold." />
+      <PageIntro eyebrow="02 · Our solution" title="A take-back system designed around material recovery." description="Return & Earn proposes a digital service where customers identify end-of-life IKEA furniture, receive a voucher estimate based on its potential recoverable material value, and return it to IKEA for verification and material recovery." />
       <section className="section section-tight">
         <div className="container">
           <div className="solution-intro">
-            <div className="solution-copy"><Eyebrow>How it could work</Eyebrow><h2>Return what has reached its end. Recover what still has value.</h2><p>Customers identify their product, receive an estimated recycling value, and bring it to IKEA. After verification, a proposed voucher rewards the return. Suitable materials can then be processed for recovery.</p></div>
-            <div className="value-equation"><span>ESTIMATED MATERIAL<br />RECOVERY VALUE</span><b>+</b><span>IKEA CIRCULARITY<br />BONUS</span><i>=</i><strong>Proposed voucher</strong></div>
+            <div className="solution-copy"><Eyebrow>How it could work</Eyebrow><h2>Return what has reached its end. Recover what still has value.</h2><p>Return &amp; Earn combines a simple digital return process with a proposed voucher incentive. The estimate considers the type and quantity of recoverable materials, assumed recovery costs, and an additional return bonus to encourage participation. After IKEA verifies and accepts the return, suitable materials could be processed for recovery.</p></div>
+            <figure className="value-equation" aria-label="Illustrative BILLY bookcase voucher calculation: potential recoverable materials are primarily wood-based board with smaller metal and plastic components; 12 SEK estimated net material value plus 20 SEK proposed return bonus equals a 32 SEK estimated voucher">
+              <figcaption>HOW A VOUCHER COULD BE CALCULATED</figcaption>
+              <p className="value-equation-subtitle">Illustrative example · BILLY bookcase</p>
+              <div className="value-equation-materials">
+                <strong>Potential recoverable materials</strong>
+                <span>Primarily wood-based board</span>
+                <span>Smaller metal and plastic components</span>
+                <small>Conceptual assessment, not a verified recycling specification.</small>
+              </div>
+              <div className="value-equation-calculation">
+                <div className="value-equation-row"><span>Estimated net material value</span><strong>12 SEK</strong></div>
+                <div className="value-equation-row"><span>Proposed return bonus</span><strong>+20 SEK</strong></div>
+                <div className="value-equation-result"><span>Estimated voucher</span><strong>32 SEK</strong></div>
+              </div>
+              <p className="value-equation-note">Net material value includes assumed recovery costs.</p>
+              <p className="value-equation-disclaimer">Illustrative figures only — not verified pricing or an IKEA offer.</p>
+            </figure>
           </div>
           <SectionHeading eyebrow="The proposed journey" title="Six steps from product to recovered material" />
           <StepCards />
-          <Notice>Drop-off at IKEA is the primary return option in this concept. Pickup alongside a new delivery could be explored later, but transport is not the core innovation.</Notice>
-          <div className="home-footnote"><span className="mini-marker" /> The value and voucher model is illustrative—not a verified pricing system.</div>
+          <Notice>The concept focuses on returns at IKEA stores. Collection alongside a new furniture delivery could be explored as a future option.</Notice>
+          <div className="solution-recovery-conclusion"><Recycle size={19} aria-hidden="true" /><p>Over time, recovered materials could provide IKEA with a more consistent source of secondary raw materials, potentially reducing the need for virgin resources.</p></div>
         </div>
       </section>
     </>
@@ -274,7 +314,7 @@ export function Ikea() {
               <p>Return &amp; Earn proposes a way for IKEA to encourage customers to return these products, creating opportunities to recover materials for future use.</p>
             </div>
             <div className="ikea-benefit-cards">
-              <InfoCard icon={Recycle} title="Material Recovery">Increase the amount of potentially useful material returned for recycling.</InfoCard>
+              <InfoCard icon={Recycle} title="Material Recovery">Returns could help IKEA build a more consistent supply of recoverable materials. Those meeting quality and processing requirements could become secondary raw materials, potentially reducing virgin-material demand over time.</InfoCard>
               <InfoCard icon={Leaf} title="Circularity Ambitions">Support IKEA's efforts to increase recycled-material use and develop circular services.</InfoCard>
             </div>
           </section>
@@ -635,7 +675,7 @@ export function References() {
             </section>
             {sources.map((group) => <section className="reference-group" key={group.group}><div className="reference-group-title"><span className="reference-dot" /><h2>{group.group}</h2></div><div className="reference-entries">{group.entries.map((source) => <article className="reference-entry" key={source.title}><div><h3>{source.title}</h3><p>{source.publisher} · {source.year}</p></div>{source.url ? <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${source.title} in a new tab`}>Open source <ArrowUpRight /></a> : <span className="tag tag-outline">TO BE VERIFIED</span>}</article>)}</div></section>)}
           </div>
-          <div className="reference-note"><LockKeyhole /><p>We have not invented furniture waste statistics, user research results, business viability findings or completed prototypes. Placeholders indicate where supporting evidence is still needed.</p></div>
+          <div className="reference-note"><LockKeyhole /><p>Furniture-waste figures on The Challenge page are historical estimates from the cited sources, not current measurements. User research results, business viability findings and completed prototypes are not claimed; placeholders indicate where evidence is still needed.</p></div>
         </div>
       </section>
     </>

@@ -87,7 +87,8 @@ export const sources: { group: string; entries: Source[] }[] = [
   {
     group: 'Furniture Waste Research',
     entries: [
-      { title: 'European furniture waste statistic', publisher: 'Source to be verified by project team', year: 'Pending', url: '' },
+      { title: 'Furniture waste research (JRC138903)', publisher: 'European Commission Joint Research Centre', year: '2024', url: 'https://circulareconomy.europa.eu/platform/sites/default/files/2024-12/JRC138903_01.pdf' },
+      { title: 'Circular economy opportunities in the furniture sector', publisher: 'European Environmental Bureau (EEB) / Eunomia', year: '2017', url: 'https://eeb.org/en/library/circular-economy-opportunities-in-the-furniture-sector/' },
       { title: 'Furniture material recovery evidence', publisher: 'Source to be added after literature review', year: 'Pending', url: '' },
     ],
   },

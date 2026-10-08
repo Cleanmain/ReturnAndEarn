@@ -130,9 +130,15 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .perspective-environment .card-icon { background: #d7e8dd; color: #397450; }
 .perspective-card h2 { max-width: 400px; font-size: 27px; line-height: 1.15; letter-spacing: -1.1px; margin: 26px 0 12px; }
 .perspective-card > p { color: #53616b; font-size: 14px; line-height: 1.7; max-width: 450px; }
-.stat-placeholder { min-height: 92px; display: flex; align-items: center; gap: 14px; padding: 15px 18px; margin-top: 25px; border-radius: 7px; background: rgba(255,255,255,.72); }
-.stat-placeholder > strong { color: #45745c; font-size: 44px; font-weight: 650; }
-.stat-placeholder > span { color: #596762; font-size: 11px; line-height: 1.5; }.stat-placeholder b { color: #233a2d; font-size: 10px; }
+.furniture-stat { margin-top: 25px; padding: 21px; border-radius: 7px; background: #fff; }
+.furniture-stat-main { display: flex; flex-direction: column; gap: 3px; }
+.furniture-stat-main strong { color: #28583c; font-size: clamp(30px, 4vw, 42px); font-weight: 800; line-height: 1.05; letter-spacing: -1.5px; }
+.furniture-stat-main span { color: #45574d; font-size: 14px; line-height: 1.5; }
+.furniture-stat-context { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 14px; margin-top: 16px; padding-top: 15px; border-top: 1px solid #e5ebe7; color: #596762; }
+.furniture-stat-context strong { color: #397450; font-size: 25px; font-weight: 800; line-height: 1.1; }
+.furniture-stat-context p { font-size: 13px; line-height: 1.55; }
+.furniture-stat-sources { margin-top: 13px; color: #66736b; font-size: 10px; line-height: 1.55; }
+.furniture-stat-sources a { color: #28583c; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
 .material-chips { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 19px; }
 .material-chips span, .tag { font-size: 9px; letter-spacing: .7px; font-weight: 800; padding: 7px 9px; border-radius: 4px; background: rgba(255,255,255,.7); color: #52655a; }
 .check-list { list-style: none; padding: 0; margin: 21px 0; display: grid; gap: 12px; color: #435462; font-size: 12px; }
@@ -146,17 +152,43 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .solution-intro { display: grid; grid-template-columns: 1fr .8fr; gap: 45px; align-items: center; margin-bottom: 72px; padding: 31px; background: #f0f5f8; border-radius: 10px; }
 .solution-copy h2 { max-width: 520px; font-size: 30px; letter-spacing: -1.1px; line-height: 1.16; margin: 11px 0 12px; }
 .solution-copy p { max-width: 580px; color: var(--muted); font-size: 14px; line-height: 1.7; }
-.value-equation { padding: 24px; background: white; border: 1px solid var(--line); border-radius: 8px; display: grid; grid-template-columns: 1fr 20px 1fr; align-items: center; gap: 11px; text-align: center; }
-.value-equation span { color: #5c6871; font-size: 9px; line-height: 1.5; font-weight: 800; letter-spacing: .6px; }
-.value-equation b, .value-equation i { color: var(--blue); font-style: normal; font-size: 21px; }
-.value-equation i { grid-column: 1 / 4; line-height: .6; }
-.value-equation strong { grid-column: 1 / 4; background: var(--yellow); padding: 11px; border-radius: 4px; font-size: 13px; }
+.value-equation { min-width: 0; margin: 0; padding: 25px; background: white; border: 1px solid var(--line); border-radius: 8px; color: #203746; text-align: left; }
+.value-equation figcaption { color: #183b53; font-size: 16px; line-height: 1.35; font-weight: 800; letter-spacing: -.2px; }
+.value-equation-subtitle { margin-top: 5px; color: #687781; font-size: 13px; line-height: 1.45; }
+.value-equation-materials { display: grid; gap: 8px; margin-top: 19px; padding: 15px 16px; border: 1px solid #e4ebef; border-radius: 6px; background: #f3f7f9; color: #52616c; text-align: left; }
+.value-equation-materials strong { margin-bottom: 1px; color: #183b53; font-size: 14px; line-height: 1.4; }
+.value-equation-materials span { font-size: 13px; line-height: 1.45; }
+.value-equation-materials small { margin-top: 2px; color: #687781; font-size: 11px; line-height: 1.45; }
+.value-equation-calculation { display: grid; gap: 13px; margin-top: 20px; }
+.value-equation-row { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; color: #405565; font-size: 13px; line-height: 1.45; }
+.value-equation-row strong { flex: 0 0 auto; color: #183b53; font-size: 15px; font-weight: 750; white-space: nowrap; }
+.value-equation-result { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 2px; padding: 15px 16px; border-radius: 5px; background: var(--yellow); color: #172b39; }
+.value-equation-result span { font-size: 14px; line-height: 1.4; font-weight: 750; }
+.value-equation-result strong { flex: 0 0 auto; font-size: 28px; line-height: 1.1; font-weight: 850; white-space: nowrap; }
+.value-equation-note, .value-equation-disclaimer { color: #52616c; font-size: 11px; line-height: 1.5; }
+.value-equation-note { margin-top: 16px; font-weight: 650; }
+.value-equation-disclaimer { margin-top: 5px; }
 .step-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin: 26px 0 23px; }
 .step-card { min-height: 173px; padding: 20px; position: relative; border: 1px solid var(--line); border-radius: 8px; background: white; }
 .step-number { position: absolute; top: 21px; right: 19px; font-size: 11px; font-weight: 800; color: #8ca0ad; letter-spacing: 1px; }
 .step-card .card-icon { width: 38px; height: 38px; }
 .step-card h3 { margin: 15px 0 5px; font-size: 16px; }
 .step-card p { color: var(--muted); font-size: 12px; line-height: 1.6; }
+.solution-journey { display: grid; gap: 0; margin: 26px 0 23px; }
+.solution-journey-row { display: grid; grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr) 36px minmax(0, 1fr); align-items: stretch; }
+.solution-step-card { min-width: 0; min-height: 180px; padding: 61px 19px 19px; }
+.solution-step-card .step-number { top: 16px; right: auto; left: 50%; display: grid; width: 34px; height: 34px; place-items: center; transform: translateX(-50%); border: 1px solid #c8dce8; border-radius: 50%; background: #e9f3f9; color: #155a88; font-size: 12px; letter-spacing: .2px; }
+.solution-step-card h3 { margin-top: 0; }
+.solution-step-card-5 { border-color: #eadb96; background: #fffdf4; }
+.solution-step-card-5 .step-number { border-color: #e7d37c; background: #fff4c2; color: #655400; }
+.solution-step-card-6 { border-color: #cbded0; background: #f8fbf8; }
+.solution-step-card-6 .step-number { border-color: #bfd5c5; background: #e9f3eb; color: #397450; }
+.solution-journey-link { align-self: start; width: 36px; height: 24px; margin-top: 21px; overflow: visible; fill: none; stroke: #64879a; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.solution-journey-turn { display: block; width: 100%; height: 52px; overflow: visible; fill: none; stroke: #64879a; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.solution-journey-turn-mobile { display: none; }
+.solution-recovery-conclusion { display: flex; align-items: flex-start; gap: 11px; margin-top: 18px; padding: 14px 16px; border-left: 3px solid #4e8560; border-radius: 4px; background: #f1f6f2; color: #344f3d; }
+.solution-recovery-conclusion svg { flex: 0 0 auto; margin-top: 2px; color: #397450; }
+.solution-recovery-conclusion p { font-size: 13px; line-height: 1.6; }
 .notice { padding: 17px 19px; border-left: 3px solid var(--blue); border-radius: 4px; background: #edf5fb; color: #405565; font-size: 12px; line-height: 1.65; margin: 22px 0; }
 .notice-yellow { background: #fff8d9; border-left-color: #d7ae00; color: #5f5220; }
 .notice code { font-size: 11px; }
@@ -306,7 +338,16 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
   .flow-list { align-items: stretch; flex-direction: column; gap: 0; padding: 10px 17px; margin-block: 25px 15px; }.flow-item { min-height: 40px; justify-content: space-between; border-bottom: 1px solid #edf0f2; font-size: 12px; }.flow-item:last-child { border-bottom: 0; }.flow-arrow { transform: rotate(90deg); font-size: 17px; }.flow-numbered .flow-item { justify-content: flex-start; }.flow-numbered .flow-arrow { margin-left: auto; }
   .banner-inner { align-items: flex-start; flex-direction: column; }.banner-inner h2 { font-size: 27px; }.home-banner { padding: 39px 0; }
   .perspective-grid, .solution-intro, .before-after, .diagram-grid, .research-layout { grid-template-columns: 1fr; }.perspective-card { min-height: unset; padding: 24px; }.perspective-card h2 { font-size: 24px; }.path-illustration { position: static; margin-top: 25px; }.question-banner { align-items: flex-start; padding: 20px; }.question-banner p { font-size: 15px; }
+  .furniture-stat-context { grid-template-columns: 1fr; gap: 5px; }
+  .value-equation-materials { grid-template-columns: 1fr; }
   .solution-intro { gap: 23px; padding: 22px; margin-bottom: 54px; }.solution-copy h2 { font-size: 25px; }.step-grid { grid-template-columns: repeat(2,1fr); }.step-card { padding: 16px; min-height: 165px; }.step-card h3 { font-size: 14px; }.step-card p { font-size: 11px; }
+  .solution-journey { gap: 0; }
+  .solution-journey-row { grid-template-columns: minmax(0, 1fr); }
+  .solution-step-card { min-height: 0; padding: 60px 19px 19px; }
+  .solution-journey-link { justify-self: center; width: 36px; height: 24px; margin: 3px 0; transform: rotate(90deg); }
+  .solution-journey-turn { height: 32px; }
+  .solution-journey-turn-desktop { display: none; }
+  .solution-journey-turn-mobile { display: inline; }
   .phones-grid { grid-template-columns: 1fr; gap: 25px; }.phone { width: 244px; }.demo-section { padding-top: 35px; }
   .persona-banner { grid-template-columns: 66px 1fr; gap: 13px; padding: 20px; }.persona-avatar { width: 59px; height: 59px; font-size: 27px; }.persona-banner h2 { font-size: 20px; }.persona-banner h2 span { display: block; margin-top: 3px; }.persona-banner p { font-size: 11px; }.persona-item { grid-column: 1 / -1; flex-direction: row; justify-content: center; border-top: 1px solid #dbe6eb; padding-top: 12px; }.persona-item .mini-bookcase { width: 30px; height: 38px; }
   .before-after { gap: 8px; }.journey-arrow { transform: rotate(90deg); height: 20px; }.journey-card { padding: 21px; }.journey-card h3 { font-size: 18px; }.card-grid-four, .metric-grid { grid-template-columns: 1fr 1fr; }.info-card { padding: 16px; }.info-card h3 { font-size: 13px; }
