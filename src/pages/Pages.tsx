@@ -26,6 +26,7 @@ import {
 } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import chalmersLogo from '../assets/chalmers-logo.png'
 import { sources, teamMembers } from '../data/siteContent'
 import { Eyebrow, FlowList, InfoCard, Notice, PageIntro, SectionHeading } from '../components/common/Content'
 
@@ -269,7 +270,7 @@ export function Ikea() {
           <section className="ikea-value-section">
             <SectionHeading
               eyebrow="A two-sided value exchange"
-              title="Connecting customers and material recovery"
+              title="A value exchange built around materials"
               description="Customers have end-of-life furniture. Return &amp; Earn encourages them to return it. IKEA gains an opportunity to recover useful materials."
             />
             <div className="ikea-value-diagram">
@@ -287,11 +288,11 @@ export function Ikea() {
                 <article className="ikea-model-party ikea-model-party-ikea">
                   <span className="ikea-actor-icon"><Factory size={24} /></span>
                   <h3>IKEA</h3>
-                  <p>Receives returned furniture and may be able to recover useful materials.</p>
+                  <p>Gains access to end-of-life furniture as a potential source of secondary raw materials.</p>
                 </article>
               </div>
               <div className="ikea-exchange-flows" aria-label="Proposed return and incentive exchange">
-                <div className="ikea-flow-row ikea-flow-return"><span>Customers</span><ArrowRight /><b>Furniture returned</b><ArrowRight /><span>IKEA</span></div>
+                <div className="ikea-flow-row ikea-flow-return"><span>Customers</span><ArrowRight /><b>End-of-life furniture</b><ArrowRight /><span>IKEA</span></div>
                 <div className="ikea-flow-row ikea-flow-incentive"><span>IKEA</span><ArrowLeft /><b>Proposed voucher / incentive</b><ArrowLeft /><span>Customers</span></div>
               </div>
               <div className="ikea-material-outcome">
@@ -301,7 +302,7 @@ export function Ikea() {
                   <ArrowRight className="ikea-outcome-arrow" />
                   <span><Recycle /> Material recovery</span>
                   <ArrowRight className="ikea-outcome-arrow" />
-                  <span><Layers /> Useful secondary materials</span>
+                  <span className="ikea-outcome-final"><Layers /> Potential secondary raw materials for IKEA</span>
                 </div>
               </div>
               <p className="ikea-diagram-note">Materials would only be suitable for future use if they meet relevant quality and processing requirements. Recovery and reintegration are not guaranteed.</p>
@@ -509,12 +510,21 @@ export function Team() {
       <section className="section section-tight">
         <div className="container">
           <div className="team-overview">
-            <div className="chalmers-placeholder"><span>CH</span><b>CHALMERS</b><small>UNIVERSITY OF TECHNOLOGY</small></div>
-            <div><Eyebrow>Capstone project</Eyebrow><h2>Team <span className="editable">[Team number]</span></h2><p>Chalmers University of Technology<br />IKEA innovation challenge · Challenge 3</p></div>
+            <img className="chalmers-logo" src={chalmersLogo} alt="Chalmers University of Technology" />
+            <div><Eyebrow>Capstone project</Eyebrow><h2>Team <span className="editable">18</span></h2><p>Chalmers University of Technology<br />IKEA innovation challenge · Challenge 3</p></div>
+            <div className="team-photo-placeholder" role="img" aria-label="Team photo placeholder">
+              <Users size={27} aria-hidden="true" />
+              <span>Team photo coming soon</span>
+            </div>
           </div>
-          <div className="member-grid">{teamMembers.map((member) => <article className="member-card" key={member.initials}><div className="member-avatar">{member.initials}<span>+</span></div><span className="tag tag-outline">ADD NAME</span><h3>{member.name}</h3><p>{member.role}</p><a href="#team-contact" className="member-contact">Add profile &amp; contact <ArrowUpRight /></a></article>)}</div>
-          <div id="team-contact" className="contact-placeholder"><span><Users /></span><div><b>Project contact</b><p>Add one or two team representatives and contact details here when agreed.</p></div><span className="tag tag-yellow">EDITABLE PLACEHOLDER</span></div>
-          <Notice tone="yellow">Replace the placeholders in <code>src/data/siteContent.ts</code> with approved team information before publication. No names, photographs or contact information have been invented.</Notice>
+          <div className="member-grid">{teamMembers.map((member) => <article className="member-card" key={member.initials}><div className="member-avatar">{member.initials}</div><h3>{member.name}</h3></article>)}</div>
+          <div id="team-contact" className="contact-placeholder">
+            <span><Users /></span>
+            <div>
+              <b>Project contact</b>
+              <p><a href="mailto:erikmorc@chalmers.se">erikmorc@chalmers.se</a><span aria-hidden="true"> · </span><a href="mailto:helinf@chalmers.se">helinf@chalmers.se</a></p>
+            </div>
+          </div>
         </div>
       </section>
     </>

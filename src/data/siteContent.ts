@@ -1,8 +1,9 @@
 export const teamMembers = [
-  { name: 'Team member 01', role: 'Project lead', initials: '01' },
-  { name: 'Team member 02', role: 'Research & insights', initials: '02' },
-  { name: 'Team member 03', role: 'Service design', initials: '03' },
-  { name: 'Team member 04', role: 'Technology & prototyping', initials: '04' },
+  { name: 'Filip Helin', initials: 'FH' },
+  { name: 'Erik Mörck', initials: 'EM' },
+  { name: 'Viktor Waller', initials: 'VW' },
+  { name: 'Hanna Bailu', initials: 'HB' },
+  { name: 'Filip Larsen', initials: 'FL' },
 ]
 
 export const sources = [
