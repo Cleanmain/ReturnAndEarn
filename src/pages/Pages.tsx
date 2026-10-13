@@ -96,7 +96,7 @@ export function Home() {
           <div className="hero-copy">
             <span className="hero-kicker"><span className="pulse-dot" /> A circularity concept</span>
             <h1>Old furniture.<br /><span>New possibilities.</span></h1>
-            <p>Return &amp; Earn is a proposed IKEA service that makes recycling end-of-life furniture simple and rewarding. Identify an old item, see an estimated recycling value, and return it for a voucher.</p>
+            <p>Return &amp; Earn is a proposed digital service for IKEA furniture that can no longer reasonably be repaired, reused or resold. Customers see an estimated material-based voucher, return the furniture to IKEA for verification, and help create opportunities for material recovery.</p>
             <div className="hero-actions">
               <Link className="button button-yellow" to="/solution">Explore our solution <ArrowRight size={17} /></Link>
               <Link className="text-link" to="/problem">Why does it matter? <ArrowUpRight size={16} /></Link>
@@ -123,17 +123,65 @@ export function Home() {
         </div>
         <div className="hero-bottom container"><span>FROM FURNITURE TO MATERIALS</span><span>Scroll to explore <ArrowDown size={14} /></span></div>
       </section>
-      <section className="section section-compact">
+      <section className="section section-compact home-concept-section">
         <div className="container">
-          <SectionHeading eyebrow="A simple idea" title="Give end-of-life furniture another purpose." description="When repair, reuse and resale are no longer reasonable, materials can still have value." />
-          <FlowList items={['Old furniture', 'Return', 'Material recovery', 'New materials']} />
-          <div className="home-footnote"><span className="mini-marker" /> A proposed service concept — not an existing IKEA offer.</div>
-        </div>
-      </section>
-      <section className="home-banner">
-        <div className="container banner-inner">
-          <div><Eyebrow light>Two-sided value</Eyebrow><h2>A small reward for customers.<br />A material opportunity for IKEA.</h2></div>
-          <Link to="/ikea" className="button button-outline">See the opportunity <ArrowRight size={17} /></Link>
+          <SectionHeading eyebrow="The idea" title="One return. Two potential benefits." description="Return &amp; Earn connects a customer incentive with an opportunity to recover valuable materials from end-of-life furniture." />
+          <div className="home-exchange" role="group" aria-label="How Return and Earn connects customers, furniture returns and IKEA">
+            <div className="home-exchange-main">
+              <article className="home-exchange-actor">
+                <span className="home-exchange-icon home-exchange-customer-icon"><Users size={22} aria-hidden="true" /></span>
+                <span className="home-exchange-label">CUSTOMERS</span>
+                <h3>Customers</h3>
+                <p>Return end-of-life furniture and receive a proposed voucher when accepted.</p>
+              </article>
+              <div className="home-exchange-connector home-furniture-connector" aria-label="Furniture return through Return and Earn">
+                <span>Furniture return</span>
+                <ArrowRight className="home-connector-right" size={22} aria-hidden="true" />
+                <ArrowDown className="home-connector-down" size={22} aria-hidden="true" />
+              </div>
+              <div className="home-exchange-service">
+                <span className="home-service-mark"><Recycle size={22} aria-hidden="true" /></span>
+                <span className="home-service-name">return<span>&amp;</span>earn</span>
+                <p>A digital service connecting furniture returns, material estimates and incentives.</p>
+              </div>
+              <div className="home-exchange-connector home-ikea-connector" aria-label="Furniture goes to IKEA for verification">
+                <span>For verification</span>
+                <ArrowRight className="home-connector-right" size={22} aria-hidden="true" />
+                <ArrowDown className="home-connector-down" size={22} aria-hidden="true" />
+              </div>
+              <article className="home-exchange-actor">
+                <span className="home-exchange-icon home-exchange-ikea-icon"><Factory size={22} aria-hidden="true" /></span>
+                <span className="home-exchange-label">RETURN POINT</span>
+                <h3>IKEA</h3>
+                <p>An opportunity to recover suitable materials for potential use as secondary raw materials.</p>
+              </article>
+            </div>
+            <div className="home-voucher-route" role="group" aria-label="After verification and acceptance, a proposed voucher may go from IKEA to customers">
+              <span className="home-voucher-condition">After IKEA verification and acceptance</span>
+              <div className="home-voucher-flow">
+                <span className="home-voucher-line" aria-hidden="true" />
+                <ArrowLeft className="home-voucher-arrow" size={20} aria-hidden="true" />
+                <span className="home-voucher-pill"><HandCoins size={17} aria-hidden="true" /> Proposed voucher</span>
+                <span className="home-voucher-direction">IKEA <span aria-hidden="true">→</span> Customers</span>
+              </div>
+            </div>
+            <div className="home-recovery-route" role="group" aria-label="Suitable materials may be recovered into secondary raw materials">
+              <span className="home-recovery-condition">If suitable for processing</span>
+              <div className="home-recovery-step">
+                <span className="home-recovery-icon"><Recycle size={18} aria-hidden="true" /></span>
+                <span>Material recovery</span>
+              </div>
+              <ArrowRight className="home-recovery-arrow" size={20} aria-hidden="true" />
+              <div className="home-recovery-step">
+                <span>Secondary raw materials</span>
+              </div>
+            </div>
+          </div>
+          <div className="home-concept-links">
+            <Link to="/customers">Explore customer benefits <ArrowRight size={15} aria-hidden="true" /></Link>
+            <Link to="/ikea">Explore IKEA&apos;s opportunity <ArrowRight size={15} aria-hidden="true" /></Link>
+          </div>
+          <p className="home-concept-disclaimer">Return &amp; Earn is a student innovation proposal, not an existing IKEA service.</p>
         </div>
       </section>
     </>
