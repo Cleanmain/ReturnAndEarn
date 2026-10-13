@@ -53,3 +53,5 @@ Research placeholders and fictional demonstration values are labeled in the inte
 ## Static deployment
 
 Run `npm run build` and deploy the contents of `dist/` to any static host. Because navigation uses React Router's history API, configure the host to serve `index.html` for unknown paths (SPA fallback) so direct visits and refreshes on nested routes work.
+
+<!-- Vercel deploy trigger check -->
