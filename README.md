@@ -11,10 +11,12 @@ A responsive, static concept website for a Chalmers University of Technology cap
 
 ```bash
 npm install
+npm install --prefix app-demo
+npm run build:demo
 npm run dev
 ```
 
-Vite prints the local development URL after startup.
+Vite prints the local development URL after startup. `npm run build:demo` builds the interactive app demo into `public/app-demo/` so the Demo page can show it; re-run it after changing the demo.
 
 ## Build and preview
 
@@ -23,14 +25,14 @@ npm run build
 npm run preview
 ```
 
-The production-ready static site is written to `dist/`.
+`npm run build` builds the app demo first, then the site. The production-ready static site is written to `dist/`, with the demo at `dist/app-demo/`.
 
 ## Pages
 
 - `/` — Overview
 - `/problem` — The problem
 - `/solution` — Our solution
-- `/demo` — Static app concept
+- `/demo` — Interactive app demo
 - `/customers` — Customer value
 - `/ikea` — IKEA value
 - `/sustainability-goals` — Sustainability goals
@@ -47,6 +49,15 @@ The site uses React, TypeScript, Vite, Tailwind CSS, React Router and Lucide Rea
 - Update page content and concept examples in `src/pages/Pages.tsx`.
 - Shared navigation and page layout live under `src/components/layout/`.
 - Global responsive styles are in `src/index.css`.
+
+## App demo
+
+The clickable prototype shown on the Demo page lives in `app-demo/`, a separate Vite app with its own `package.json` (see `app-demo/README.md`). It is embedded in an iframe from `public/app-demo/`, which is generated and git-ignored.
+
+```bash
+npm --prefix app-demo run dev   # work on the demo on its own
+npm run build:demo              # rebuild it for the website
+```
 
 Research placeholders and fictional demonstration values are labeled in the interface. Verify sustainability targets and sources against current official publications before external use.
 
