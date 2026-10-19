@@ -31,8 +31,6 @@ jobs:
             app-demo/package-lock.json
       - name: Install dependencies
         run: npm ci
-      - name: Install app demo dependencies
-        run: npm ci --prefix app-demo
       - name: Build site
         run: npm run build
       - name: Add SPA route fallback

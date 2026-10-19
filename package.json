@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "postinstall": "npm --prefix app-demo install --no-audit --no-fund",
     "dev": "vite",
     "build:demo": "npm --prefix app-demo run build",
     "build": "npm run build:demo && tsc -b && vite build",

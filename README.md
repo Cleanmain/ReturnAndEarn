@@ -10,8 +10,7 @@ A responsive, static concept website for a Chalmers University of Technology cap
 ## Install and run
 
 ```bash
-npm install
-npm install --prefix app-demo
+npm install        # also installs the app demo's dependencies
 npm run build:demo
 npm run dev
 ```
