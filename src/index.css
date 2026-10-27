@@ -36,8 +36,8 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .site-header { height: 76px; position: sticky; z-index: 50; top: 0; background: rgba(255,255,255,.96); border-bottom: 1px solid rgba(23,33,43,.08); backdrop-filter: blur(16px); }
 .header-inner { max-width: 1320px; height: 100%; margin: 0 auto; padding: 0 36px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
 .wordmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; flex: 0 0 auto; }
-.wordmark-icon { width: 37px; height: 37px; display: grid; place-items: center; background: var(--blue); color: white; font-size: 12px; font-weight: 850; letter-spacing: -.8px; border-radius: 50%; }
-.wordmark-icon span, .wordmark-copy > span { color: var(--yellow); }
+.wordmark-icon { display: block; width: 37px; height: 37px; flex: 0 0 auto; border-radius: 50%; }
+.wordmark-copy > span { color: var(--yellow); }
 .wordmark-copy { font-size: 18px; letter-spacing: -.8px; font-weight: 800; }
 .primary-nav { height: 100%; display: flex; align-items: center; gap: 8px; }
 .primary-nav > a, .nav-group > .nav-dropdown-trigger { color: #46535f; text-decoration: none; font-size: 13px; font-weight: 650; padding: 11px 13px; border: 0; background: transparent; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
@@ -350,7 +350,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 
 .site-footer { color: #e7eff4; background: #102f47; padding: 38px 0 0; }
 .footer-inner, .footer-bottom { max-width: 1160px; width: calc(100% - 48px); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.wordmark-light .wordmark-copy { color: white; }.wordmark-light .wordmark-icon { background: white; color: var(--blue); }.footer-brand p { margin-top: 10px; color: #afc4d1; font-size: 10px; }
+.wordmark-light .wordmark-copy { color: white; }.footer-brand p { margin-top: 10px; color: #afc4d1; font-size: 10px; }
 .footer-note { display: flex; align-items: center; gap: 8px; color: #c0d0da; font-size: 10px; }.footer-note svg { color: #b7d688; }
 .footer-link { display: inline-flex; gap: 5px; align-items: center; color: #fff; font-size: 10px; font-weight: 700; text-decoration: none; }.footer-link:hover { color: var(--yellow); }
 .footer-bottom { margin-top: 31px; padding: 14px 0; border-top: 1px solid rgba(255,255,255,.15); color: #a9bdca; font-size: 9px; }

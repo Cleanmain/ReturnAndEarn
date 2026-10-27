@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="footer-inner">
         <div className="footer-brand">
           <Link className="wordmark wordmark-light" to="/">
-            <span className="wordmark-icon" aria-hidden="true">R<span>&</span>E</span>
+            <img className="wordmark-icon" src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" aria-hidden="true" />
             <span className="wordmark-copy">return<span>&</span>earn</span>
           </Link>
           <p>A student concept for a more circular future.</p>

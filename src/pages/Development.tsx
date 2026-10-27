@@ -334,7 +334,7 @@ export default function Development() {
               <span className="status-icon"><ClipboardCheck size={19} aria-hidden="true" /></span>
               <h3>Implemented in the prototype</h3>
               <ul>
-                <li>Three static phone-screen mockups displayed on the Demo page.</li>
+                <li>Three static phone-screen mockups displayed on the Development page.</li>
                 <li>Illustrative product, estimate, return guidance and sample confirmation content.</li>
                 <li>Website navigation between the project pages.</li>
               </ul>
@@ -345,7 +345,7 @@ export default function Development() {
               <ul>
                 <li>The BILLY product example and its listed material components.</li>
                 <li>12 SEK estimated material value + 20 SEK proposed Participation Bonus = 32 SEK.</li>
-                <li>Search, estimate, QR placeholder and screen buttons are visual only; no calculations or return actions run.</li>
+                <li>Search, estimates, return-code confirmation and screen controls are visual only; no calculations or return actions run.</li>
               </ul>
             </article>
             <article className="prototype-status-card status-future">

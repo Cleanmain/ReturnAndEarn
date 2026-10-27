@@ -31,7 +31,7 @@ export default function PrototypeScreens() {
           <div className="phone-search"><ScanLine size={15} aria-hidden="true" /> Search products</div>
           <div className="phone-product"><div className="mini-bookcase"><i /><i /><i /></div><div><strong>BILLY</strong><small>Bookcase, white<br />80 × 28 × 202 cm</small></div><Check size={16} aria-hidden="true" /></div>
           <div className="phone-tip">Does your furniture need replacing? Check if its materials could be recovered.</div>
-          <button className="phone-button" type="button">Check recycling value</button>
+          <div className="phone-button" aria-hidden="true">Check recycling value</div>
         </Phone>
         <Phone title="Your estimate" number="02">
           <div className="estimate-head"><span>Illustrative estimate</span><strong>32 <small>SEK</small></strong></div>
@@ -43,9 +43,8 @@ export default function PrototypeScreens() {
         </Phone>
         <Phone title="Ready to return" number="03">
           <div className="return-check"><span><Check aria-hidden="true" /></span><b>Your item is ready for review</b><small>Bring your furniture to a participating IKEA returns point.</small></div>
-          <div className="qr-placeholder" role="img" aria-label="Decorative QR code placeholder"><div /></div>
-          <div className="phone-warning">Sample confirmation only. No voucher or QR code is active.</div>
-          <button className="phone-button" type="button">View return details</button>
+          <div className="phone-warning">Sample confirmation only · no active return code or voucher.</div>
+          <div className="phone-button" aria-hidden="true">View return details</div>
         </Phone>
       </div>
       <Notice tone="yellow">The 12 SEK estimated material value and 20 SEK Participation Bonus are fictional examples for this concept—not IKEA prices, verified material values or an actual offer. Screen controls are visual mockups and are not interactive.</Notice>

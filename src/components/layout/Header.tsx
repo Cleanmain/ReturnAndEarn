@@ -90,7 +90,7 @@ export default function Header() {
     <header className="site-header">
       <div className="header-inner">
         <Link className="wordmark" to="/" onClick={closeMenus} aria-label="Return and Earn home">
-          <span className="wordmark-icon" aria-hidden="true">R<span>&</span>E</span>
+          <img className="wordmark-icon" src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" aria-hidden="true" />
           <span className="wordmark-copy">return<span>&</span>earn</span>
         </Link>
         <button
