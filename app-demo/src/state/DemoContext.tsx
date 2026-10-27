@@ -64,7 +64,7 @@ const DemoContext = createContext<DemoContextValue | null>(null);
 export function DemoProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<DemoState>(load);
   const [toast, setToast] = useState<string | null>(null);
-  const toastTimer = useRef<number>();
+  const toastTimer = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     try {
