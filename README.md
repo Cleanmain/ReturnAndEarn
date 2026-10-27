@@ -1,6 +1,9 @@
-# Return & Earn
+# ReturnAndEarn_Team18 — Return & Earn
 
-A responsive, static concept website for a Chalmers University of Technology capstone project developed in response to an IKEA innovation challenge. Return & Earn is a proposed end-of-life furniture take-back and material recovery service—not an official IKEA service.
+**Submission identifier:** `ReturnAndEarn_Team18`
+**Visible project name:** Return & Earn · **Team:** 18
+
+A responsive, static concept website for the Sustainable Digitalization in Practice course at Chalmers University of Technology, developed as an IKEA Capstone Project. Return & Earn is a proposed end-of-life furniture take-back and material recovery service—not an official IKEA service.
 
 ## Requirements
 
@@ -35,7 +38,7 @@ npm run preview
 - `/customers` — Customer value
 - `/ikea` — IKEA value
 - `/sustainability-goals` — Sustainability goals
-- `/circularity` — Circularity and sustainable software
+- `/circularity` — Preliminary sustainability assessment, effects diagrams and validation questions
 - `/development` — Development and research
 - `/team` — Project team
 - `/references` — Sources
@@ -44,8 +47,9 @@ The site uses React, TypeScript, Vite, Tailwind CSS, React Router and Lucide Rea
 
 ## Editing content
 
-- Update team placeholders and source entries in `src/data/siteContent.ts`.
-- Update page content and concept examples in `src/pages/Pages.tsx`.
+- Update team member names and source entries in `src/data/siteContent.ts`.
+- Update most page content and concept examples in `src/pages/Pages.tsx`; the Circularity and Development pages are in `src/pages/Circularity.tsx` and `src/pages/Development.tsx`.
+- Static phone-screen mockups used on the Development page are in `src/components/common/PrototypeScreens.tsx`. The interactive Demo page is built from `app-demo/`.
 - Shared navigation and page layout live under `src/components/layout/`.
 - Global responsive styles are in `src/index.css`.
 
@@ -58,7 +62,7 @@ npm --prefix app-demo run dev   # work on the demo on its own
 npm run build:demo              # rebuild it for the website
 ```
 
-Research placeholders and fictional demonstration values are labeled in the interface. Verify sustainability targets and sources against current official publications before external use.
+Fictional demonstration values are labeled in the interface; sources with links that could not be verified are explicitly marked for manual checking. Verify sustainability targets and sources against current official publications before external use.
 
 ## Static deployment
 
@@ -67,3 +71,5 @@ Run `npm run build` and deploy the contents of `dist/` to any static host. Becau
 ### GitHub Pages
 
 The `Deploy to GitHub Pages` workflow builds and publishes the site from `main` whenever changes are pushed (and can also be run manually). In the repository settings, open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**. The published site is available at `https://cleanmain.github.io/ReturnAndEarn/`.
+
+The GitHub repository and deployed project URL retain their existing `ReturnAndEarn` names to avoid breaking links; they do not include the `Team18` suffix from the submission identifier.

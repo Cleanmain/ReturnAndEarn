@@ -16,7 +16,7 @@ export default function Footer() {
           <Leaf size={17} aria-hidden="true" />
           <span>Independent university concept · Not an official IKEA service</span>
         </div>
-        <a className="footer-link" href="https://www.ikea.com/global/en/our-business/sustainability/our-circular-agenda/" target="_blank" rel="noreferrer">
+        <a className="footer-link" href="https://www.ikea.com/global/en/our-business/sustainability/our-circular-agenda/" target="_blank" rel="noopener noreferrer">
           IKEA circular agenda <ArrowUpRight size={15} aria-hidden="true" />
         </a>
       </div>

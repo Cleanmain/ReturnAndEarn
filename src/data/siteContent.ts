@@ -15,6 +15,8 @@ export type Source = {
   number?: number
   used?: string
   location?: string
+  accessLabel?: string
+  accessDescription?: string
 }
 
 export const ikeaSources: Source[] = [
@@ -22,30 +24,34 @@ export const ikeaSources: Source[] = [
     id: 'ref-1',
     number: 1,
     title: 'IKEA Sustainability Strategy 2025–2030',
-    publisher: 'Inter IKEA Systems B.V.',
-    year: '2025',
-    url: 'https://www.ikea.com/global/en/images/IKEA_Sustainability_Strategy_2025_2030_v3_251013_f76f0e6498.pdf',
-    used: 'The 2030 ambitions for recycled and renewable content, circular fulfilment score and circular services, and the stated action to secure availability, traceability and affordability of responsibly sourced secondary raw materials.',
-    location: 'PDF pp. 21 and 26',
+    publisher: 'Origin and publisher not independently verified',
+    year: 'Reported as 2025; verify',
+    url: '',
+    used: 'Existing project content attributes the 2030 ambitions for recycled and renewable content, circular fulfilment score, circular services, and secondary raw material availability, traceability and affordability to this source. Verify these claims against the document before submission.',
+    location: 'Existing project notes cite PDF pp. 21 and 26; page references not independently verified.',
+    accessLabel: 'Source origin and bibliographic details require manual verification',
+    accessDescription: 'The PDF was not found in the repository or available project documentation, and the broken public URL has no verified replacement. The claimed IKEA-provided origin, document title, publisher, year, page references and attributed claims must be confirmed by the team. Do not treat this citation as verified.',
   },
   {
     id: 'ref-2',
     number: 2,
     title: 'IKEA Sustainability Report FY24',
-    publisher: 'Inter IKEA Systems B.V.',
-    year: 'FY24 (published February 2025)',
-    url: 'https://www.ikea.com/global/en/images/IKEA_Sustainability_Report_FY_24_2025_02_06_0aaa025249.pdf',
-    used: 'The 2030 recycled-wood goal, the FY24 recycled content in particleboard (30.3%) and progress examples including IKEA Industry in Hultsfred, Sweden.',
-    location: 'PDF pp. 23 and 34',
+    publisher: 'Origin and publisher not independently verified',
+    year: 'Reported as FY24 (published February 2025); verify',
+    url: '',
+    used: 'Existing project content attributes the 80% recycled wood content in particleboard ambition and FY24 reported figure of 30.3% to this source. Verify these claims against the document before submission.',
+    location: 'Existing project notes cite PDF pp. 23 and 34; page references not independently verified.',
+    accessLabel: 'Source origin and bibliographic details require manual verification',
+    accessDescription: 'The PDF was not found in the repository or available project documentation, and the broken public URL has no verified replacement. The claimed IKEA-provided origin, document title, publisher, year, page references and attributed claims must be confirmed by the team. Do not treat this citation as verified.',
   },
   {
     id: 'ref-3',
     number: 3,
     title: 'Wood and forestry',
     publisher: 'Inter IKEA Group',
-    year: 'Webpage, viewed 8 October 2026 (reports FY25)',
+    year: 'FY25 data; undated webpage, viewed 27 October 2026',
     url: 'https://www.ikea.com/global/en/our-business/sustainability/wood-forestry/',
-    used: 'IKEA\'s work to increase recycled wood in its products and the FY25 figure that 19% of the wood used was recycled (pre- and post-consumer content).',
+    used: 'The FY25 figure that approximately 19% of total wood used was recycled, including pre- and post-consumer content. This is not a particleboard-specific figure.',
     location: 'Section "Efficiently used"',
   },
   {
@@ -53,9 +59,9 @@ export const ikeaSources: Source[] = [
     number: 4,
     title: 'Recycled materials',
     publisher: 'Inter IKEA Group',
-    year: 'Webpage, viewed 8 October 2026',
+    year: 'Undated webpage, viewed 27 October 2026',
     url: 'https://www.ikea.com/global/en/our-business/sustainability/recycled-materials/',
-    used: 'IKEA\'s statement that current availability of recycled feedstock is insufficient, its focus on traceability, and its definitions of pre- and post-consumer material.',
+    used: 'IKEA\'s statements about availability, traceability and affordability constraints for recycled materials, and definitions of pre- and post-consumer material.',
     location: 'Sections "Building scalability, availability and affordability of recycled materials" and "Fast facts"',
   },
   {
@@ -63,10 +69,10 @@ export const ikeaSources: Source[] = [
     number: 5,
     title: 'Wood design and innovation',
     publisher: 'Inter IKEA Group',
-    year: 'Webpage, viewed 8 October 2026 (reports FY25)',
+    year: 'Undated webpage, viewed 27 October 2026',
     url: 'https://www.ikea.com/global/en/our-business/sustainability/wood-design-and-innovation/',
-    used: 'Particleboard as a major wood-based material, products such as BILLY, PAX and MALM, and the recovery of suitable end-of-life material for new particleboard.',
-    location: 'Section "The case for particle board"',
+    used: 'IKEA\'s discussion of wood-based product design and the recovery of suitable end-of-life particleboard material for use in new particleboard. This does not establish the feasibility of Return & Earn.',
+    location: 'Section "The case for particleboard"',
   },
 ]
 
@@ -74,33 +80,97 @@ export const sources: { group: string; entries: Source[] }[] = [
   {
     group: 'Additional IKEA Sources',
     entries: [
-      { title: 'Our circular agenda', publisher: 'Inter IKEA Group', year: 'Ongoing', url: 'https://www.ikea.com/global/en/our-business/sustainability/our-circular-agenda/' },
-      { title: 'IWAY — supplier code of conduct', publisher: 'Inter IKEA Group', year: 'Ongoing', url: 'https://www.ikea.com/global/en/our-business/how-we-work/iway-our-supplier-code-of-conduct/' },
+      {
+        title: 'Our circular agenda',
+        publisher: 'Inter IKEA Group',
+        year: 'Undated webpage, viewed 27 October 2026',
+        url: 'https://www.ikea.com/global/en/our-business/sustainability/our-circular-agenda/',
+        used: 'Background on IKEA circular design principles, including reuse, repair, refurbishment and recycling.',
+      },
     ],
   },
   {
     group: 'IKEA Existing Services',
     entries: [
-      { title: 'Buy Back, resale, removal and recycling services (verify by market)', publisher: 'IKEA country websites', year: 'To verify', url: '' },
+      {
+        title: 'Sell to IKEA (Buyback & Resell, Sweden)',
+        publisher: 'IKEA Sweden',
+        year: 'Undated webpage, viewed 27 October 2026',
+        url: 'https://www.ikea.com/se/en/second-hand/sell-to-ikea/',
+        used: 'IKEA Sweden explains online product estimation, bringing an item to IKEA, receiving an IKEA refund card and resale in As-Is stores. Service terms and availability are market-specific.',
+      },
     ],
   },
   {
     group: 'Furniture Waste Research',
     entries: [
-      { title: 'Furniture waste research (JRC138903)', publisher: 'European Commission Joint Research Centre', year: '2024', url: 'https://circulareconomy.europa.eu/platform/sites/default/files/2024-12/JRC138903_01.pdf' },
-      { title: 'Circular economy opportunities in the furniture sector', publisher: 'European Environmental Bureau (EEB) / Eunomia', year: '2017', url: 'https://eeb.org/en/library/circular-economy-opportunities-in-the-furniture-sector/' },
-      { title: 'Furniture material recovery evidence', publisher: 'Source to be added after literature review', year: 'Pending', url: '' },
+      {
+        title: 'Ecodesign for Sustainable Products Regulation: Study on new product priorities',
+        publisher: 'European Commission Joint Research Centre',
+        year: '2024',
+        url: 'https://doi.org/10.2760/7400680',
+        used: 'Assesses product categories for potential ESPR priorities; furniture is one of the assessed categories. It is not the source for the furniture waste-generation or treatment figures on The Challenge page.',
+      },
+      {
+        title: 'Circular economy opportunities in the furniture sector',
+        publisher: 'European Environmental Bureau (EEB), prepared by Eunomia Research & Consulting',
+        year: '2017',
+        url: 'https://eeb.org/en/library/circular-economy-opportunities-in-the-furniture-sector/',
+        used: 'Historical estimates of 10 million tonnes of furniture discarded annually in EU countries and 80–90% of EU furniture waste in municipal solid waste being incinerated or landfilled; the latter is attributed in the report to UEA statistics.',
+        location: 'PDF pp. 3 and 12',
+      },
     ],
   },
   {
-    group: 'Academic & Technical Sources',
+    group: 'Product and Material Background',
     entries: [
-      { title: 'Design Thinking research', publisher: 'Academic source to be selected by project team', year: 'Pending', url: '' },
-      { title: 'React documentation', publisher: 'Meta Open Source', year: 'Ongoing', url: 'https://react.dev/learn' },
-      { title: 'TypeScript documentation', publisher: 'Microsoft', year: 'Ongoing', url: 'https://www.typescriptlang.org/docs/' },
-      { title: 'Vite documentation', publisher: 'Vite contributors', year: 'Ongoing', url: 'https://vite.dev/guide/' },
-      { title: 'React Router documentation', publisher: 'React Router', year: 'Ongoing', url: 'https://reactrouter.com/start/library/installation' },
-      { title: 'Lucide React documentation', publisher: 'Lucide contributors', year: 'Ongoing', url: 'https://lucide.dev/guide/packages/lucide-react' },
+      {
+        title: 'BILLY bookcase product information',
+        publisher: 'IKEA Sweden',
+        year: 'Undated product page, viewed 27 October 2026',
+        url: 'https://www.ikea.com/se/en/p/billy-bookcase-oak-effect-90477385/',
+        used: 'A market-specific IKEA product example used in background exploration; it does not establish material-recovery feasibility.',
+      },
+      {
+        title: 'Particleboard',
+        publisher: 'European Panel Federation',
+        year: 'Undated webpage, viewed 27 October 2026',
+        url: 'https://europanels.org/the-wood-based-panel-industry/types-of-wood-based-panels-economic-impact/particleboard/',
+        used: 'Background on particleboard composition and the use of recycled sources in particleboard production.',
+      },
+    ],
+  },
+  {
+    group: 'Technical Documentation',
+    entries: [
+      {
+        title: 'React documentation: Quick Start',
+        publisher: 'Meta Open Source',
+        year: 'Living documentation, viewed 27 October 2026',
+        url: 'https://react.dev/learn',
+        used: 'Technical documentation for the React interface used in this website.',
+      },
+      {
+        title: 'TypeScript documentation',
+        publisher: 'Microsoft',
+        year: 'Living documentation, viewed 27 October 2026',
+        url: 'https://www.typescriptlang.org/docs/',
+        used: 'Technical documentation for the TypeScript codebase.',
+      },
+      {
+        title: 'Vite Guide',
+        publisher: 'Vite contributors',
+        year: 'Living documentation, viewed 27 October 2026',
+        url: 'https://vite.dev/guide/',
+        used: 'Technical documentation for the website build and development tooling.',
+      },
+      {
+        title: 'React Router: Declarative Installation',
+        publisher: 'React Router',
+        year: 'Living documentation, viewed 27 October 2026',
+        url: 'https://reactrouter.com/start/declarative/installation',
+        used: 'Technical documentation for client-side routing in this website.',
+      },
     ],
   },
 ]

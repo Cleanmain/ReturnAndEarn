@@ -9,7 +9,6 @@ import {
   CircleDollarSign,
   ClipboardList,
   Factory,
-  FileQuestion,
   HandCoins,
   HeartHandshake,
   Leaf,
@@ -22,14 +21,15 @@ import {
   Sparkles,
   Truck,
   Users,
-  Wrench,
 } from 'lucide-react'
 import { useEffect } from 'react'
 import type { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import chalmersLogo from '../assets/chalmers-logo.png'
 import { ikeaSources, sources, teamMembers } from '../data/siteContent'
-import { Eyebrow, FlowList, InfoCard, Notice, PageIntro, SectionHeading } from '../components/common/Content'
+import { Eyebrow, InfoCard, Notice, PageIntro, SectionHeading } from '../components/common/Content'
+export { default as Circularity } from './Circularity'
+export { default as Development } from './Development'
 
 function Cite({ n }: { n: number }) {
   const source = ikeaSources.find((item) => item.number === n)
@@ -39,6 +39,7 @@ function Cite({ n }: { n: number }) {
 function SourceLink({ n, children }: { n: number; children: ReactNode }) {
   const source = ikeaSources.find((item) => item.number === n)
   if (!source) return null
+  if (!source.url) return <Link className="source-link" to={`/references#ref-${n}`}>{children} (manual verification required)</Link>
   return <a className="source-link" href={source.url} target="_blank" rel="noopener noreferrer">{children} <ArrowUpRight aria-hidden="true" /></a>
 }
 
@@ -200,9 +201,9 @@ export function Problem() {
               <h2>Materials are lost from useful cycles.</h2>
               <p>End-of-life furniture can contain wood, metals, plastics and textiles. When these materials are not recovered, potential secondary resources are lost and demand for virgin materials may remain higher.</p>
               <div className="furniture-stat">
-                <div className="furniture-stat-main"><strong>~10 million tonnes</strong><span>of furniture waste generated in the EU each year</span></div>
-                <div className="furniture-stat-context"><strong>80–90%</strong><p>Historically estimated to be incinerated or landfilled within the EU municipal furniture-waste stream.</p></div>
-                <p className="furniture-stat-sources">Sources: <a href="https://circulareconomy.europa.eu/platform/sites/default/files/2024-12/JRC138903_01.pdf" target="_blank" rel="noopener noreferrer">European Commission JRC (2024)</a>; <a href="https://eeb.org/en/library/circular-economy-opportunities-in-the-furniture-sector/" target="_blank" rel="noopener noreferrer">EEB/Eunomia (2017)</a>.</p>
+                <div className="furniture-stat-main"><strong>~10 million tonnes</strong><span>of furniture discarded by businesses and consumers in EU countries each year (2017 estimate)</span></div>
+                <div className="furniture-stat-context"><strong>80–90%</strong><p>Historical estimate for the share of EU furniture waste in municipal solid waste incinerated or landfilled, attributed to UEA statistics in the report.</p></div>
+                <p className="furniture-stat-sources">Source: <a href="https://eeb.org/en/library/circular-economy-opportunities-in-the-furniture-sector/" target="_blank" rel="noopener noreferrer">EEB report, prepared by Eunomia (2017), pp. 3 and 12</a>.</p>
               </div>
             </article>
             <article className="perspective-card perspective-individual">
@@ -232,7 +233,7 @@ export function Solution() {
       <section className="section section-tight">
         <div className="container">
           <div className="solution-intro">
-            <div className="solution-copy"><Eyebrow>How it could work</Eyebrow><h2>Return what has reached its end. Recover what still has value.</h2><p>Return &amp; Earn combines a simple digital return process with a proposed voucher incentive. The estimate considers the type and quantity of recoverable materials, assumed recovery costs, and an additional return bonus to encourage participation. After IKEA verifies and accepts the return, suitable materials could be processed for recovery.</p></div>
+            <div className="solution-copy"><Eyebrow>How it could work</Eyebrow><h2>Return what has reached its end. Recover what still has value.</h2><p>The concept is intended for furniture that can no longer reasonably be repaired, reused or resold; those options take priority over material recycling. Return &amp; Earn combines a simple digital return process with a proposed voucher incentive. The estimate considers the type and quantity of recoverable materials, assumed recovery costs, and an additional return bonus to encourage participation. After IKEA verifies and accepts the return, suitable materials could be processed for recovery.</p></div>
             <figure className="value-equation" aria-label="Illustrative BILLY bookcase voucher calculation: potential recoverable materials are primarily wood-based board with smaller metal and plastic components; 12 SEK estimated net material value plus 20 SEK proposed return bonus equals a 32 SEK estimated voucher">
               <figcaption>HOW A VOUCHER COULD BE CALCULATED</figcaption>
               <p className="value-equation-subtitle">Illustrative example · BILLY bookcase</p>
@@ -558,82 +559,6 @@ export function SustainabilityGoals() {
   )
 }
 
-export function Circularity() {
-  const dimensions = [
-    { icon: Users, title: 'Individual', items: 'Convenience · Affordability · Agency · Accessibility', note: 'Trade-off: voucher values may be modest or vary between products.' },
-    { icon: HeartHandshake, title: 'Social', items: 'Participation · Inclusiveness · Trust · Transparency', note: 'Trade-off: unclear eligibility or verification could reduce trust.' },
-    { icon: Leaf, title: 'Environmental', items: 'Material recovery · Waste reduction · Logistics · Energy', note: 'Trade-off: extra transport and sorting consume resources.' },
-    { icon: CircleDollarSign, title: 'Economic', items: 'Incentives · Material value · Processing costs · Scale', note: 'Trade-off: rewards may exceed the recovered material value.' },
-    { icon: LockKeyhole, title: 'Technical', items: 'Usability · Maintainability · Adaptability · Privacy', note: 'Trade-off: product data and return verification add system complexity.' },
-  ]
-  return (
-    <>
-      <PageIntro eyebrow="07 · Circularity & sustainable software" title="Beyond recycling—building a circular system." description="A responsible take-back service starts by keeping useful products in use. It also considers the wider social, environmental, economic and technical consequences of the software." />
-      <section className="section section-tight">
-        <div className="container">
-          <SectionHeading eyebrow="Circularity hierarchy" title="Recycle only when better options no longer fit." description="Return & Earn focuses on end-of-life furniture. It should not encourage customers to recycle something that remains useful." />
-          <div className="hierarchy">
-            {[
-              { name: 'Maintain', icon: Wrench },
-              { name: 'Repair', icon: Wrench },
-              { name: 'Reuse', icon: HeartHandshake },
-              { name: 'Resell', icon: CircleDollarSign },
-              { name: 'Recycle', icon: Recycle },
-            ].map(({ name, icon: Icon }, index) => <div className={`hierarchy-step${index === 4 ? ' hierarchy-focus' : ''}`} key={name}><span className="hierarchy-icon"><Icon /></span><b>{name}</b><small>{index === 4 ? 'Project focus' : `Priority ${index + 1}`}</small></div>)}
-          </div>
-          <SectionHeading eyebrow="Sustainable requirements framework" title="Five dimensions to design for" description="A working framework for evaluating potential benefits alongside risks and trade-offs." />
-          <div className="dimension-list">
-            {dimensions.map(({ icon: Icon, title, items, note }, i) => <article className="dimension-card" key={title}><span className="dimension-num">0{i + 1}</span><span className="card-icon"><Icon /></span><div><h3>{title}</h3><p>{items}</p><small>{note}</small></div></article>)}
-          </div>
-          <div className="diagram-grid">
-            <article className="diagram-placeholder"><span><FileQuestion /></span><div><Eyebrow>Placeholder · To be completed</Eyebrow><h3>Diagram 1 — Immediate, Enabling, and Structural Effects</h3><p>To be developed as part of the course sustainability analysis. No research diagram is represented as completed.</p></div></article>
-            <article className="diagram-placeholder"><span><FileQuestion /></span><div><Eyebrow>Placeholder · To be completed</Eyebrow><h3>Diagram 2 — Likelihood and Sustainability Impact</h3><p>To be completed by the project team after documenting assumptions and evidence.</p></div></article>
-          </div>
-        </div>
-      </section>
-    </>
-  )
-}
-
-export function Development() {
-  const architecture = ['Customer interface', 'Product identification', 'Material value estimate', 'Return management', 'IKEA verification', 'Recycling tracking']
-  const timeline = ['Idea', 'Research', 'Prototype', 'User testing', 'Pilot', 'Evaluation', 'Scale']
-  const questions = [
-    'What recycling incentives would motivate customers?',
-    'How accurately can product material values be estimated?',
-    'What are the costs of collection and sorting?',
-    'Which recovered materials could IKEA reuse?',
-    'How could IKEA integrate this service with existing operations?',
-    'Could the business model become economically viable at scale?',
-  ]
-  return (
-    <>
-      <PageIntro eyebrow="08 · Development & research" title="From concept to reality." description="This living project space will document how the idea develops. We are currently at an early concept and prototype stage." />
-      <section className="section section-tight">
-        <div className="container">
-          <div className="architecture-panel">
-            <div className="architecture-heading"><div><Eyebrow>Proposed architecture</Eyebrow><h2>One return journey, connected end to end.</h2></div><span className="tag tag-outline">CONCEPT ONLY</span></div>
-            <div className="architecture-flow">{architecture.map((item, index) => <div className="architecture-node" key={item}><span className="architecture-number">0{index + 1}</span><b>{item}</b>{index < architecture.length - 1 && <ArrowRight className="architecture-arrow" />}</div>)}</div>
-            <p className="source-note">Possible future components—not existing IKEA integrations. Any implementation would require operational, data and security validation.</p>
-          </div>
-          <SectionHeading eyebrow="Project journey" title="A path from idea to evidence" />
-          <div className="timeline">{timeline.map((item, index) => <div className={`timeline-step${index === 0 ? ' timeline-done' : ''}${index === 1 || index === 2 ? ' timeline-current' : ''}`} key={item}><span>{index === 0 ? <Check /> : `0${index + 1}`}</span><b>{item}</b>{(index === 1 || index === 2) && <small>{index === 2 ? 'Current focus' : 'Active'}</small>}</div>)}</div>
-          <div className="design-thinking">
-            <div><Eyebrow>Design Thinking</Eyebrow><h2>Learn with people. Build from evidence.</h2><p>Our intended approach is iterative: understand customer and material-system needs, define the right problem, explore possible service flows, prototype, then test and learn.</p></div>
-            <FlowList items={['Empathize', 'Define', 'Ideate', 'Prototype', 'Test']} />
-            <span className="source-note">Planned process—not a claim that interviews or user testing have already taken place.</span>
-          </div>
-          <div className="research-layout">
-            <div><Eyebrow>What we still need to learn</Eyebrow><h2>Open research questions</h2><p>These questions will guide future research, prototyping and evaluation.</p></div>
-            <ul className="question-list">{questions.map((question) => <li key={question}><span><FileQuestion /></span>{question}</li>)}</ul>
-          </div>
-          <div className="updates-placeholder"><span className="updates-icon"><ClipboardList /></span><div><Eyebrow>Living project log</Eyebrow><h3>Research findings and updates will appear here.</h3><p>Add interview learnings, prototype iterations, diagrams and decisions as the project progresses.</p></div><span className="tag tag-outline">UPDATES COMING SOON</span></div>
-        </div>
-      </section>
-    </>
-  )
-}
-
 export function Team() {
   return (
     <>
@@ -642,11 +567,7 @@ export function Team() {
         <div className="container">
           <div className="team-overview">
             <img className="chalmers-logo" src={chalmersLogo} alt="Chalmers University of Technology" />
-            <div><Eyebrow>Capstone project</Eyebrow><h2>Team <span className="editable">18</span></h2><p>Chalmers University of Technology<br />IKEA innovation challenge · Challenge 3</p></div>
-            <div className="team-photo-placeholder" role="img" aria-label="Team photo placeholder">
-              <Users size={27} aria-hidden="true" />
-              <span>Team photo coming soon</span>
-            </div>
+            <div><Eyebrow>IKEA Capstone Project</Eyebrow><h2>Return &amp; Earn · Team <span className="editable">18</span></h2><p>Sustainable Digitalization in Practice<br />Chalmers University of Technology</p></div>
           </div>
           <div className="member-grid">{teamMembers.map((member) => <article className="member-card" key={member.initials}><div className="member-avatar">{member.initials}</div><h3>{member.name}</h3></article>)}</div>
           <div id="team-contact" className="contact-placeholder">
@@ -671,13 +592,13 @@ export function References() {
   }, [hash])
   return (
     <>
-      <PageIntro eyebrow="10 · Sources & transparency" title="Evidence matters." description="This page separates verified public sources from research references still to be added. Verify every claim against its source before publication." />
+      <PageIntro eyebrow="10 · Sources & transparency" title="Evidence matters." description="Sources are listed with the claims and context they support. Any source whose link could not be verified is identified for manual checking." />
       <section className="section section-tight">
         <div className="container">
-          <Notice>Accessed 8 October 2026 where a source URL is provided. IKEA targets and figures on the Why IKEA? and 2030 Goals pages are numbered and link to the entries below; recheck them against the latest official IKEA reporting before publication.</Notice>
+          <Notice>Public source links were checked on 27 October 2026. The PDFs cited as [1] and [2] were not found in the repository or available project documentation, and their previous public URLs returned 404. Their origin and bibliographic details could not be confirmed; verify them and their attributed claims before submission.</Notice>
           <div className="references-list">
             <section className="reference-group">
-              <div className="reference-group-title"><span className="reference-dot" /><h2>IKEA Official Publications</h2></div>
+              <div className="reference-group-title"><span className="reference-dot" /><h2>Numbered IKEA-attributed References</h2></div>
               <div className="reference-entries">
                 {ikeaSources.map((source) => (
                   <article className="reference-entry reference-entry-numbered" id={source.id} key={source.id}>
@@ -687,15 +608,38 @@ export function References() {
                       <p>{source.publisher} · {source.year}</p>
                       <p className="reference-used"><b>Used for:</b> {source.used}</p>
                       {source.location && <p className="reference-used"><b>Where:</b> {source.location}</p>}
+                      {!source.url && source.accessDescription && <p className="reference-access-description"><b>Access:</b> {source.accessLabel}. {source.accessDescription}</p>}
                     </div>
-                    <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${source.title} in a new tab`}>Open source <ArrowUpRight /></a>
+                    {source.url
+                      ? <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${source.title} in a new tab`}>Open source <ArrowUpRight aria-hidden="true" /></a>
+                      : !source.accessDescription && <span className="reference-status">{source.accessLabel ?? 'Link unavailable; manual check required'}</span>}
                   </article>
                 ))}
               </div>
             </section>
-            {sources.map((group) => <section className="reference-group" key={group.group}><div className="reference-group-title"><span className="reference-dot" /><h2>{group.group}</h2></div><div className="reference-entries">{group.entries.map((source) => <article className="reference-entry" key={source.title}><div><h3>{source.title}</h3><p>{source.publisher} · {source.year}</p></div>{source.url ? <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${source.title} in a new tab`}>Open source <ArrowUpRight /></a> : <span className="tag tag-outline">TO BE VERIFIED</span>}</article>)}</div></section>)}
+            {sources.map((group) => (
+              <section className="reference-group" key={group.group}>
+                <div className="reference-group-title"><span className="reference-dot" /><h2>{group.group}</h2></div>
+                <div className="reference-entries">
+                  {group.entries.map((source) => (
+                    <article className="reference-entry" key={source.title}>
+                      <div>
+                        <h3>{source.title}</h3>
+                        <p>{source.publisher} · {source.year}</p>
+                        {source.used && <p className="reference-used"><b>Used for:</b> {source.used}</p>}
+                        {source.location && <p className="reference-used"><b>Where:</b> {source.location}</p>}
+                        {!source.url && source.accessDescription && <p className="reference-access-description"><b>Access:</b> {source.accessLabel}. {source.accessDescription}</p>}
+                      </div>
+                      {source.url
+                        ? <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${source.title} in a new tab`}>Open source <ArrowUpRight aria-hidden="true" /></a>
+                        : !source.accessDescription && <span className="reference-status">{source.accessLabel ?? 'Link unavailable; manual check required'}</span>}
+                    </article>
+                  ))}
+                </div>
+              </section>
+            ))}
           </div>
-          <div className="reference-note"><LockKeyhole /><p>Furniture-waste figures on The Challenge page are historical estimates from the cited sources, not current measurements. User research results, business viability findings and completed prototypes are not claimed; placeholders indicate where evidence is still needed.</p></div>
+          <div className="reference-note"><LockKeyhole /><p>The furniture-waste figures on The Challenge page are historical estimates, not current measurements. The 80–90% figure is for EU furniture waste in municipal solid waste and is attributed to UEA statistics in the 2017 EEB report. Return &amp; Earn's proposed process, voucher amounts and potential outcomes are project assumptions—not published findings or evidence of feasibility.</p></div>
         </div>
       </section>
     </>
